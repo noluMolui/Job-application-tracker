@@ -1,16 +1,21 @@
-# React + Vite
+I built this app to help me keep track of all the jobs I'm applying for in one place. I wanted something that looked clean and worked fast on my phone.
+Features:
+Dashboard: Shows my total applications and how many interviews or offers I have.
+Live Tracker: A table where I can add new jobs and change their status (Applied, Interview, etc.).
+Resources: A list of links and guides I use for interview prep.
+Glass UI: I used a "Glassmorphism" style with blur effects to make it look modern.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tech I Used
+React for the frontend.
+Node.js and Express for my server.
+MongoDB Atlas to store all the application data.
+Lucide-React for all the icons.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+ Things I learned
+How to handle responsive tables so they don't break on mobile screens.
+Why security is important—I had to learn how to use environment variables to keep my database password safe.
+CRUD Logic: I built the full cycle—Creating jobs, Reading the list, Updating statuses, and Deleting old entries.
+Data Schemas: Used Mongoose to ensure every application has a required company name and status before saving.
+Security: Learned the hard way to use .env files for my MongoDB URI after an accidental leak.
+Connection Handling: Managed CORS and Port 5000 setup so the frontend can actually talk to the database.
+Debugging: Handled 500 errors by checking server logs and fixing broken database queries.
