@@ -1,18 +1,14 @@
 import React from 'react';
 import ApplicationForm from '../Forms/ApplicationForm';
 import { 
-  LayoutDashboard, 
-  TrendingUp, 
-  CheckCircle2, 
-  Clock,
-  Briefcase,
-  PackageSearch,
-  XCircle,
-  ExternalLink 
+  LayoutDashboard, TrendingUp, CheckCircle2, Clock,
+  Briefcase, PackageSearch, XCircle, ExternalLink, Trash2 
 } from 'lucide-react';
 
-export default function Dashboard({ apps, onAdd, onUpdate }) {
-  // Stats calculation
+
+export default function Dashboard({ apps, onAdd, onUpdate, onDelete }) {
+
+  
   const totalCount = apps.length;
   const interviewCount = apps.filter(a => a.status === 'Interview').length;
   const offerCount = apps.filter(a => a.status === 'Offer').length;
@@ -21,13 +17,8 @@ export default function Dashboard({ apps, onAdd, onUpdate }) {
   return (
     <div className="dashboard-container" style={{ padding: '20px', maxWidth: '1400px', margin: '0 auto' }}>
       
-      {/* Top Stats Row */}
-      <div className="stats-strip" style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(4, 1fr)', 
-        gap: '20px', 
-        marginBottom: '30px' 
-      }}>
+      
+      <div className="stats-strip" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '30px' }}>
         <div className="glass-card"><LayoutDashboard size={18}/> <span>Total: {totalCount}</span></div>
         <div className="glass-card" style={{color: '#2563eb'}}><Clock size={18}/> <span>Interviews: {interviewCount}</span></div>
         <div className="glass-card" style={{color: '#059669'}}><CheckCircle2 size={18}/> <span>Offers: {offerCount}</span></div>
@@ -36,7 +27,7 @@ export default function Dashboard({ apps, onAdd, onUpdate }) {
 
       <div className="dashboard-grid" style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '30px', alignItems: 'start' }}>
         
-        {/* Left Side: Form */}
+    
         <aside className="glass-card sidebar-form" style={{ position: 'sticky', top: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
             <Briefcase size={20} color="#7c3aed" />
@@ -45,7 +36,7 @@ export default function Dashboard({ apps, onAdd, onUpdate }) {
           <ApplicationForm onAdd={onAdd} />
         </aside>
 
-        {/* Right Side: THE TABLE */}
+        {/* 3. Main Section: Live Tracker */}
         <section className="glass-card" style={{ padding: '0', overflow: 'hidden' }}>
           <div style={{ padding: '20px', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between' }}>
              <h3 style={{ margin: 0 }}>Live Tracker</h3>
@@ -71,15 +62,18 @@ export default function Dashboard({ apps, onAdd, onUpdate }) {
                 </thead>
                 <tbody style={{ fontSize: '0.9rem' }}>
                   {apps.map(app => (
-                    <tr key={app.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                    <tr key={app._id} style={{ borderBottom: '1px solid #f1f5f9' }}>
                       <td style={{ padding: '15px', fontWeight: 600 }}>{app.company}</td>
                       <td style={{ color: '#64748b' }}>{app.position}</td>
-                      <td style={{ color: '#94a3b8' }}>{app.date}</td>
+                      <td style={{ color: '#94a3b8' }}>
+                        {new Date(app.date).toLocaleDateString()}
+                      </td>
                       <td>
+                     
                         <select 
                           className={`status-badge ${app.status}`}
                           value={app.status} 
-                          onChange={(e) => onUpdate(app.id, e.target.value)}
+                          onChange={(e) => onUpdate(app._id, e.target.value)}
                           style={{ padding: '4px 8px', borderRadius: '6px', border: '1px solid #e2e8f0', cursor: 'pointer' }}
                         >
                           <option value="Applied">Applied</option>
@@ -88,9 +82,29 @@ export default function Dashboard({ apps, onAdd, onUpdate }) {
                           <option value="Rejected">Rejected</option>
                         </select>
                       </td>
-                      <td>
+                      <td style={{ display: 'flex', gap: '10px', alignItems: 'center', padding: '15px' }}>
                         <button style={{ background: 'none', border: 'none', color: '#cbd5e1', cursor: 'pointer' }}>
                           <ExternalLink size={16} />
+                        </button>
+
+                     
+                        <button 
+                          onClick={() => {
+                            if(window.confirm("Are you sure you want to delete this application?")) {
+                              onDelete(app._id);
+                            }
+                          }}
+                          style={{ 
+                            background: 'none', 
+                            border: 'none', 
+                            color: '#f87171', 
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center'
+                          }}
+                          title="Delete Application"
+                        >
+                          <Trash2 size={16} />
                         </button>
                       </td>
                     </tr>

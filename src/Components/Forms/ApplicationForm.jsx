@@ -1,16 +1,35 @@
 import React, { useState } from 'react';
+import API from '../../api'; 
 
 export default function ApplicationForm({ onAdd }) {
   const [form, setForm] = useState({ 
-    company: '', position: '', status: 'Applied', 
+    company: '', 
+    position: '', 
+    status: 'Applied', 
     date: new Date().toISOString().split('T')[0] 
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.company) return;
-    onAdd(form);
-    setForm({ company: '', position: '', status: 'Applied', date: new Date().toISOString().split('T')[0] });
+
+    try {
+     
+      const res = await API.post('/applications', form);
+      
+      onAdd(res.data); 
+      
+      setForm({ 
+        company: '', 
+        position: '', 
+        status: 'Applied', 
+        date: new Date().toISOString().split('T')[0] 
+      });
+      alert('Application Tracked! 🚀');
+    } catch (err) {
+      console.error(err);
+      alert('Error saving application. Are you logged in?');
+    }
   };
 
   return (
