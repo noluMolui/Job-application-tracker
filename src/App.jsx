@@ -97,6 +97,7 @@ export default function App() {
           <Route path="/analytics" element={<Analytics apps={apps} />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </Router>
