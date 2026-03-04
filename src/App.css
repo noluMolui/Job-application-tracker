@@ -22,35 +22,39 @@ body {
 
 body {
   background-color: var(--bg);
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   color: var(--text);
+  line-height: 1.5;
 }
 
-/* --- Layout Components --- */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
+/* --- Navigation Header & Dropdown --- */
 .nav-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 5%;
+  padding: 1rem 5%;
   background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #7c3aed;
+  color: var(--primary);
   margin: 0;
+}
+
+/* Toggle Button - Only visible on mobile */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  padding: 5px;
 }
 
 .nav-links {
@@ -67,7 +71,7 @@ body {
 }
 
 .nav-links a:hover {
-  color: #7c3aed;
+  color: var(--primary);
 }
 
 .logout-btn {
@@ -78,37 +82,47 @@ body {
   color: #ef4444;
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
 
 .logout-btn:hover {
   background: #fee2e2;
 }
 
-/* --- Dashboard & Grid --- */
-.dashboard,
+/* --- Dashboard Layout & Grid --- */
+.dashboard-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .dashboard-grid {
   display: grid;
   grid-template-columns: 320px 1fr;
-  gap: 2.5rem;
+  gap: 2rem;
   align-items: start;
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+  background: #ffffff;
   padding: 2rem;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
+/* --- Tables & Lists --- */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* --- Forms & Inputs --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; }
 input,
 select {
   width: 100%;
@@ -116,6 +130,7 @@ select {
   margin: 8px 0 18px 0;
   border: 1px solid var(--border);
   border-radius: 12px;
+  font-size: 1rem;
 }
 
 .primary-btn {
@@ -127,124 +142,58 @@ select {
   font-weight: 700;
   cursor: pointer;
   width: 100%;
+  transition: background 0.2s;
 }
 
-/* --- Status & Data States --- */
+.primary-btn:hover {
+  background: var(--primary-hover);
+}
+
+
 .status-badge {
   padding: 6px 14px;
-  border-radius: 10px;
+  border-radius: 20px;
   font-weight: 700;
   font-size: 0.75rem;
   text-transform: uppercase;
-  border: none;
-  cursor: pointer;
 }
 
-.Applied {
-  background: #e0f2fe;
-  color: #0369a1;
-}
-.Interview {
-  background: #f5f3ff;
-  color: #7c3aed;
-}
-.Offer {
-  background: #ecfdf5;
-  color: #059669;
-}
-.Rejected {
-  background: #fff1f2;
-  color: #e11d48;
-}
 
-.timeline {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px dashed var(--border);
-}
-
-.timeline-event {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  color: #64748b;
-  margin-bottom: 0.3rem;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 4rem;
-  background: #f1f5f9;
-  border-radius: 24px;
-  border: 2px dashed #cbd5e1;
-}
-
-/* --- Responsive Media Queries --- */
-@media (max-width: 900px) {
-  .dashboard,
+@media (max-width: 1024px) {
   .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar-form {
-    position: static !important;
-  }
-
-  .stats-strip,
-  .stats-header,
-  .metrics-grid {
-    grid-template-columns: 1fr 1fr !important;
-    display: grid !important;
-    gap: 10px !important;
-  }
-
-  .table-responsive {
-    width: 100%;
-    overflow-x: auto;
-    display: block;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  table {
-    min-width: 600px;
-    width: 100%;
+    grid-template-columns: 1fr; 
   }
 }
+
 
 @media (max-width: 768px) {
-  header,
-  nav {
-    flex-direction: column !important;
-    gap: 10px;
-    padding: 1rem !important;
-    text-align: center;
+  .menu-toggle {
+    display: block; 
   }
 
-  .dashboard-grid,
-  .main-layout {
-    display: flex !important;
-    flex-direction: column !important;
-    padding: 15px !important;
-    width: 100% !important;
+  .nav-links {
+    display: none; 
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 20px;
+    gap: 15px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--border);
   }
 
-  .glass-card,
-  .form-container {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
+  .nav-links.active {
+    display: flex; 
   }
 
-  .live-tracker-container,
-  table {
-    display: block !important;
-    overflow-x: auto !important;
-    white-space: nowrap !important;
-    width: 100% !important;
+  .glass-card {
+    padding: 1.25rem; 
   }
 
-  .analytics-container,
-  .resources-grid {
-    padding: 10px !important;
+  .stats-strip {
+    gap: 10px !important;
   }
 }

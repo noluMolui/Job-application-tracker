@@ -48,19 +48,18 @@ export default function Dashboard({ apps, onAdd, onUpdate, onDelete }) {
   };
 
   return (
-    <div
-      className="dashboard-container"
-      style={{ padding: "20px", maxWidth: "1400px", margin: "0 auto" }}
-    >
-      <div
-        className="stats-strip"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          gap: "20px",
-          marginBottom: "30px",
-        }}
-      >
+   <div className="dashboard-container" style={{ 
+    padding: "10px", 
+    maxWidth: "1400px", 
+    margin: "0 auto" 
+}}>
+      <div className="stats-strip" style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", 
+    gap: "12px", 
+    marginBottom: "30px",
+}}>
+      
         <div
           className="glass-card"
           style={{ display: "flex", alignItems: "center", gap: "12px" }}
@@ -118,10 +117,10 @@ export default function Dashboard({ apps, onAdd, onUpdate, onDelete }) {
           </div>
           <ApplicationForm onAdd={onAdd} />
         </aside>
-        <section
-          className="glass-card tracker-container"
-          style={{ padding: "0", overflow: "hidden" }}
-        >
+       <section
+  className="glass-card tracker-container"
+  style={{ padding: "0" }} // Removed overflow: "hidden"
+>
           <div
             style={{
               padding: "20px",
