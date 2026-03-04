@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react'; // Import eye icons
+import { Eye, EyeOff } from 'lucide-react'; // Make sure this is installed
 import API from '../../api';
 
 export default function Register() {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
-  const [showPassword, setShowPassword] = useState(false); // State for visibility
+  const [showPassword, setShowPassword] = useState(false); // Toggle state
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -38,31 +38,30 @@ export default function Register() {
             required 
           />
           
-          {/* Password Input with Eye Toggle */}
-          <div className="password-wrapper" style={{ position: 'relative' }}>
+          {/* Keep your exact same styling, just add the icon button */}
+          <div style={{ position: 'relative', width: '100%' }}>
             <input 
               type={showPassword ? "text" : "password"} 
               placeholder="Password" 
-              style={{ paddingRight: '45px' }} // Make room for the icon
               onChange={e => setFormData({...formData, password: e.target.value})} 
               required 
+              style={{ paddingRight: '40px' }} 
             />
             <button 
-              type="button"
+              type="button" 
               onClick={() => setShowPassword(!showPassword)}
               style={{
                 position: 'absolute',
-                right: '12px',
-                top: '35%',
+                right: '10px',
+                top: '40%',
                 transform: 'translateY(-50%)',
                 background: 'none',
                 border: 'none',
-                color: '#64748b',
                 cursor: 'pointer',
-                padding: '0'
+                color: '#64748b'
               }}
             >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
 
