@@ -15,8 +15,7 @@ export default function ApplicationForm({ onAdd }) {
 
     try {
       const res = await API.post('/applications', form);
-      onAdd(res.data); // Updates the tracker immediately
-      
+      onAdd(res.data); 
       setForm({ 
         company: '', 
         position: '', 
@@ -46,7 +45,7 @@ export default function ApplicationForm({ onAdd }) {
         required 
       />
       <div className="input-group">
-        <label style={{ fontSize: '0.8rem', color: '#64748b' }}>Date Applied</label>
+        <label style={{ fontSize: '0.8rem', color: '#64748b', display: 'block', marginBottom: '5px' }}>Date Applied</label>
         <input 
           type="date" 
           value={form.date} 

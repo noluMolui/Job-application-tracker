@@ -1,4 +1,3 @@
-
 :root {
   --primary: #7c3aed;
   --primary-hover: #6d28d9;
@@ -27,6 +26,7 @@ body {
   line-height: 1.5;
 }
 
+/* ================= NAV ================= */
 
 .nav-header {
   display: flex;
@@ -46,7 +46,6 @@ body {
   color: var(--primary);
   margin: 0;
 }
-
 
 .menu-toggle {
   display: none;
@@ -89,6 +88,7 @@ body {
   background: #fee2e2;
 }
 
+/* ================= DASHBOARD CORE ================= */
 
 .dashboard-container {
   width: 100%;
@@ -102,6 +102,7 @@ body {
   grid-template-columns: 320px 1fr;
   gap: 2rem;
   align-items: start;
+  width: 100%;
 }
 
 .glass-card {
@@ -112,25 +113,58 @@ body {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
+/* ================= STATS ================= */
 
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-table {
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1.25rem !important;
+}
+
+/* ================= FORM ================= */
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  border-collapse: collapse;
-  min-width: 600px; }
-input,
-select {
+}
+
+.form-stack input,
+.form-stack select,
+.form-stack .input-group input,
+.form-stack .password-wrapper input,
+.form-stack div input {
+  width: 100% !important;
+  display: block !important;
+  padding: 12px 16px !important;
+  margin: 8px 0 16px 0 !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  font-size: 1rem !important;
+  background: white !important;
+  box-sizing: border-box !important;
+}
+
+.form-stack .password-wrapper,
+.form-stack .input-group {
   width: 100%;
-  padding: 12px;
-  margin: 8px 0 18px 0;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: 5px;
 }
 
 .primary-btn {
@@ -143,36 +177,100 @@ select {
   cursor: pointer;
   width: 100%;
   transition: background 0.2s;
+  margin-top: 10px;
 }
 
 .primary-btn:hover {
   background: var(--primary-hover);
 }
 
+/* ================= TABLE ================= */
 
-.status-badge {
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-weight: 700;
-  font-size: 0.75rem;
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  display: block;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px;
+}
+
+.table-responsive th {
+  background: #f8fafc;
+  padding: 15px;
+  text-align: left;
+  font-size: 0.8rem;
+  color: #64748b;
   text-transform: uppercase;
 }
 
+.table-responsive td {
+  padding: 15px;
+  border-bottom: 1px solid #f1f5f9;
+  white-space: nowrap;
+}
+
+.company-cell {
+  font-weight: 600;
+}
+
+.status-select {
+  padding: 6px 12px !important;
+  border-radius: 20px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  border: 1px solid transparent;
+  width: auto !important;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #f87171;
+  cursor: pointer;
+}
+
+/* ================= HEADERS ================= */
+
+.form-header,
+.tracker-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tracker-header {
+  padding: 20px;
+  border-bottom: 1px solid #f1f5f9;
+  justify-content: space-between;
+}
+
+/* ================= RESPONSIVENESS ================= */
 
 @media (max-width: 1024px) {
   .dashboard-grid {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-form {
+    order: -1;
   }
 }
 
-
 @media (max-width: 768px) {
+
   .menu-toggle {
-    display: block; 
+    display: block;
   }
 
   .nav-links {
-    display: none; 
+    display: none;
     flex-direction: column;
     position: absolute;
     top: 100%;
@@ -186,52 +284,74 @@ select {
   }
 
   .nav-links.active {
-    display: flex; 
+    display: flex;
+  }
+
+  .dashboard-container {
+    padding: 10px;
   }
 
   .glass-card {
-    padding: 1.25rem; 
+    padding: 1.25rem;
   }
 
   .stats-strip {
     gap: 10px !important;
   }
-}
-/* Ensure inputs don't overflow on small screens */
-.form-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
 
-.form-stack input {
-  width: 100%;
-  padding: 10px;
-  margin: 0; 
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 0.95rem;
-}
-
-@media (max-width: 768px) {
-  .sidebar-form {
-    padding: 1.25rem !important;
-    margin-bottom: 20px !important;
+  .form-stack input,
+  .form-stack select {
+    font-size: 16px;
   }
 
-  td, th {
-    padding: 10px 8px !important;
-    font-size: 0.85rem;
+  /* Table → Card Layout */
+  table {
+    min-width: 100% !important;
   }
 
-  .tracker-container {
-    padding-bottom: 20px;
+  .table-responsive table,
+  .table-responsive thead,
+  .table-responsive tbody,
+  .table-responsive th,
+  .table-responsive td,
+  .table-responsive tr {
+    display: block;
+    width: 100%;
   }
-}
 
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-  white-space: nowrap;
-  border-radius: 8px;
+  .table-responsive thead {
+    display: none !important;
+  }
+
+  .table-responsive tr {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .table-responsive td {
+    border: none !important;
+    padding: 8px 0 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: normal !important;
+  }
+
+  .table-responsive td::before {
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .table-responsive td:nth-child(1)::before { content: "Company"; }
+  .table-responsive td:nth-child(2)::before { content: "Position"; }
+  .table-responsive td:nth-child(3)::before { content: "Date"; }
+  .table-responsive td:nth-child(4)::before { content: "Status"; }
+  .table-responsive td:nth-child(5)::before { content: ""; }
+
+  .delete-btn {
+    align-self: flex-end;
+  }
 }

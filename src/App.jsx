@@ -4,11 +4,12 @@ import API from './api';
 import './App.css';
 
 import Navbar from './Components/Layout/Navbar';
+import Login from './Components/Views/Login';
+import Register from './Components/Views/Register';
 import Dashboard from './Components/Views/Dashboard';
 import Analytics from './Components/Views/Analytics';
 import Resources from './Components/Views/Resources';
-import Login from './Components/Views/Login';
-import Register from './Components/Views/Register';
+
 
 export default function App() {
   const [apps, setApps] = useState([]);

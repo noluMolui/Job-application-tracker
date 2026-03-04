@@ -30,8 +30,8 @@ export default function Resources() {
       title: "Resume & Portfolio",
       icon: <Lightbulb size={20} color="#059669" />,
       items: [
-        { name: "ATS-Friendly Template", type: "Download", url: "https://www.overleaf.com/latex/templates/jakes-resume/syzrnksghjzh" },
-        { name: "Portfolio Best Practices", type: "Guide", url: "https://www.freecodecamp.org/news/how-to-build-a-portfolio-website/" }
+        { name: "ATS-Friendly Template", type: "Download", url: "https://www.overleaf.com/latex/templates/tagged/cv" },
+        { name: "Portfolio Best Practices", type: "Guide", url: "https://www.freecodecamp.org/news/coding-projects-to-include-in-your-frontend-portfolio/" }
       ]
     }
   ];
