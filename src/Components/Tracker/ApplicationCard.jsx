@@ -8,7 +8,6 @@ const ApplicationForm = () => {
     e.preventDefault();
     try {
       await API.post('/applications', formData);
-      alert('Job tracked successfully! ✅');
       setFormData({ company: '', position: '', status: 'Applied' });
     } catch (err) {
       alert('Error: Please login first!');
