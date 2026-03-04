@@ -8,7 +8,7 @@ export default function Analytics({ apps }) {
   const successRate = total > 0 ? ((offers / total) * 100).toFixed(0) : 0;
 
   return (
-    <div className="analytics-container" style={{ display: 'flex', flexDirection: 'column', gap: '25px', padding: '20px' }}>
+    <div className="analytics-container" style={{ display: 'flex', flexDirection: 'column', gap: '25px',  }}>
       <div className="glass-card" style={{ padding: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
           <BarChart3 size={24} color="#7c3aed" />
